@@ -27,7 +27,7 @@ cap = cv.VideoCapture('D:\PeopleCounter-master\PeopleCounter-master\Test Files\T
 ##cap.set(3,160) #Width
 ##cap.set(4,120) #Height
 
-#img data to be viewed in two parts
+#img data to be viewed in two parts ek normal do line ke sath aur ek mask wala
 # if it is a video file
 # ###this video is very much clearer than the previous one 
 for i in range(19):
@@ -94,14 +94,14 @@ while(cap.isOpened()):
     fgmask = fgbg.apply(frame)
     fgmask2 = fgbg.apply(frame)
 
-    #Binariazcion para eliminar sombras (color gris)
+
     try:
         ret,imBin= cv.threshold(fgmask,200,255,cv.THRESH_BINARY)
         ret,imBin2 = cv.threshold(fgmask2,200,255,cv.THRESH_BINARY)
-        #Opening (erode->dilate) para quitar ruido.
+
         mask = cv.morphologyEx(imBin, cv.MORPH_OPEN, kernelOp)
         mask2 = cv.morphologyEx(imBin2, cv.MORPH_OPEN, kernelOp)
-        #Closing (dilate -> erode) para juntar regiones blancas.
+
         mask =  cv.morphologyEx(mask , cv.MORPH_CLOSE, kernelCl)
         mask2 = cv.morphologyEx(mask2, cv.MORPH_CLOSE, kernelCl)
     except:
